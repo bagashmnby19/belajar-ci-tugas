@@ -15,16 +15,16 @@ $routes->get('logout', 'AuthController::logout');
 $routes->group('produk', ['filter' => 'auth'], function ($routes) { 
     $routes->get('', 'ProdukController::index');
     $routes->post('', 'ProdukController::create');
-    $routes->post('edit/(:num)', 'ProdukController::edit/$1', ['filter' => 'auth']);
-    $routes->get('delete/(:num)', 'ProdukController::delete/$1', ['filter' => 'auth']);
+    $routes->post('edit/(:any)', 'ProdukController::edit/$1');
+    $routes->get('delete/(:any)', 'ProdukController::delete/$1');
     $routes->get('download', 'ProdukController::download');
 });
 
-$routes->group('product_categories', ['filter' => 'auth'], function ($routes) { 
-    $routes->get('', 'ProductCategoryController::index');
-    $routes->post('', 'ProductCategoryController::create');
-    $routes->post('edit/(:num)', 'ProductCategoryController::edit/$1', ['filter' => 'auth']);
-    $routes->get('delete/(:num)', 'ProductCategoryController::delete/$1', ['filter' => 'auth']);
+$routes->group('produkkategori', ['filter' => 'auth'], function ($routes) { 
+    $routes->get('', 'ProdukCategoryController::index');
+    $routes->post('', 'ProdukCategoryController::create');
+    $routes->post('edit/(:any)', 'ProdukCategoryController::edit/$1');
+    $routes->get('delete/(:any)', 'ProdukCategoryController::delete/$1');
 });
 
 $routes->group('keranjang', ['filter' => 'auth'], function ($routes) {
@@ -34,8 +34,10 @@ $routes->group('keranjang', ['filter' => 'auth'], function ($routes) {
     $routes->get('delete/(:any)', 'TransaksiController::cart_delete/$1');
     $routes->get('clear', 'TransaksiController::cart_clear');
 });
+
 $routes->get('checkout', 'TransaksiController::checkout', ['filter' => 'auth']);
 $routes->post('buy', 'TransaksiController::buy', ['filter' => 'auth']);
+
 $routes->get('get-location', 'TransaksiController::getLocation', ['filter' => 'auth']);
 $routes->get('get-cost', 'TransaksiController::getCost', ['filter' => 'auth']);
 
@@ -43,4 +45,11 @@ $routes->get('profile', 'Home::profile', ['filter' => 'auth']);
 $routes->get('faq', 'Home::faq', ['filter' => 'auth']);
 $routes->get('contact', 'Home::contact', ['filter' => 'auth']);
 
+$routes->group('admin', ['filter' => 'auth'], function($routes) {
+    $routes->resource('diskon', ['controller' => 'Admin\Diskon']);
+});
+
+
+
+$routes->get('api/uas-report', 'ApiController::uasReport');
 $routes->resource('api', ['controller' => 'apiController']);

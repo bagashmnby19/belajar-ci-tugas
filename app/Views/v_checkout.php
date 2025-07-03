@@ -77,7 +77,6 @@
     </div>
 </div>
 <?= $this->endSection() ?>
-
 <?= $this->section('script') ?>
 <script>
 $(document).ready(function() {
@@ -111,7 +110,6 @@ $(document).ready(function() {
     minimumInputLength: 3
 });
 
-
 $("#kelurahan").on('change', function() {
     var id_kelurahan = $(this).val(); 
     $("#layanan").empty();
@@ -141,6 +139,7 @@ $("#layanan").on('change', function() {
     ongkir = parseInt($(this).val());
     hitungTotal();
 });  
+
     function hitungTotal() {
         total = ongkir + <?= $total ?>;
 

@@ -4,11 +4,10 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class ProductCategory extends Migration
+class CreateDiskonTable extends Migration
 {
     public function up()
     {
-        // Membuat tabel product_categories
         $this->forge->addField([
             'id' => [
                 'type'           => 'INT',
@@ -16,13 +15,11 @@ class ProductCategory extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            'name' => [
-                'type'       => 'VARCHAR',
-                'constraint' => 290,
+            'tanggal' => [
+                'type' => 'DATE',
             ],
-            'description' => [
-                'type'       => 'VARCHAR',
-                'constraint' => 290,
+            'nominal' => [
+                'type' => 'DOUBLE',
             ],
             'created_at' => [
                 'type' => 'DATETIME',
@@ -33,14 +30,12 @@ class ProductCategory extends Migration
                 'null' => true,
             ],
         ]);
-
-        $this->forge->addKey('id', true); // Primary key
-        $this->forge->createTable('product_categories'); // Membuat tabel
+        $this->forge->addKey('id', true);
+        $this->forge->createTable('diskon');
     }
 
     public function down()
     {
-        // Menghapus tabel product_categories
-        $this->forge->dropTable('product_categories');
+        $this->forge->dropTable('diskon');
     }
 }

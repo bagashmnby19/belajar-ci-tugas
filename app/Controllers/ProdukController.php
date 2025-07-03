@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Controllers;
-
 use App\Models\ProductModel;
 use Dompdf\Dompdf;
 
@@ -12,13 +11,15 @@ class ProdukController extends BaseController
     function __construct()
     {
         $this->product = new ProductModel();
-    }
-
+    } 
+  
+    
     public function index()
     {
         $product = $this->product->findAll();
         $data['product'] = $product;
 
+        $data['menu_aktif'] = 'produk';
         return view('v_produk', $data);
     }
 
@@ -42,9 +43,9 @@ class ProdukController extends BaseController
         $this->product->insert($dataForm);
 
         return redirect('produk')->with('success', 'Data Berhasil Ditambah');
-    }
-    
-    public function edit($id)
+    } 
+
+        public function edit($id)
     {
         $dataProduk = $this->product->find($id);
 
